@@ -54,7 +54,7 @@ const Home = () => {
 
               <div className={styles.postCommentsIcon}>
                 <img
-                  src="https://cdn-icons-png.flaticon.com/128/1756/1756220.png"
+                  src="https://cdn-icons-png.flaticon.com/128/11081/11081584.png"
                   alt="comments-icon"
                 />
                 <span>{post.comments.length}</span>
