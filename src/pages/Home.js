@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Comment, Loader } from '../components';
 import { getPosts } from '../api';
@@ -33,11 +34,21 @@ const Home = () => {
           <div className={styles.postHeader}>
             <div className={styles.postAvatar}>
               <img
-                src="https://cdn-icons-png.flaticon.com/128/9742/9742390.png"
+                src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
                 alt="user-pic"
               />
               <div>
-                <span className={styles.postAuthor}>{post.user.name}</span>
+                <Link
+                  to={{
+                    pathname: `/user/${post.user._id}`,
+                    state: {
+                      user: post.user,
+                    },
+                  }}
+                  className={styles.postAuthor}
+                >
+                  {post.user.name}
+                </Link>
                 <span className={styles.postTime}>a minute ago</span>
               </div>
             </div>
@@ -46,7 +57,7 @@ const Home = () => {
             <div className={styles.postActions}>
               <div className={styles.postLike}>
                 <img
-                  src="https://cdn-icons-png.flaticon.com/128/10106/10106706.png"
+                  src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
                   alt="likes-icon"
                 />
                 <span>5</span>
@@ -54,7 +65,7 @@ const Home = () => {
 
               <div className={styles.postCommentsIcon}>
                 <img
-                  src="https://cdn-icons-png.flaticon.com/128/11081/11081584.png"
+                  src="https://image.flaticon.com/icons/svg/1380/1380338.svg"
                   alt="comments-icon"
                 />
                 <span>{post.comments.length}</span>

@@ -1,18 +1,47 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { ToastProvider } from 'react-toast-notifications';
+export * from './constants';
 
-import './styles/index.css';
-import { App } from './components';
-import { AuthProvider } from './providers/AuthProvider';
+// import {
+//   setItemInLocalStorage,
+//   getItemFromLocalStorage,
+//   removeItemFromLocalStorage,
+//   getFormBody,
+// } from './constants';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <ToastProvider autoDismiss autoDismissTimeout={5000} placement="top-left">
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </ToastProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+export const setItemInLocalStorage = (key, value) => {
+  if (!key || !value) {
+    return console.error('Can not store in LS');
+  }
+
+  const valueToStore =
+    typeof value !== 'string' ? JSON.stringify(value) : value;
+
+  localStorage.setItem(key, valueToStore);
+};
+
+export const getItemFromLocalStorage = (key) => {
+  if (!key) {
+    return console.error('Can get the value from LS');
+  }
+
+  return localStorage.getItem(key);
+};
+export const removeItemFromLocalStorage = (key) => {
+  if (!key) {
+    return console.error('Can get the value from LS');
+  }
+
+  localStorage.removeItem(key);
+};
+
+export const getFormBody = (params) => {
+  let formBody = [];
+
+  for (let property in params) {
+    let encodedKey = encodeURIComponent(property); // 'user name' => 'user%20name'
+    let encodedValue = encodeURIComponent(params[property]); // aakash 123 => aakash%2020123
+
+    formBody.push(encodedKey + '=' + encodedValue);
+  }
+
+  return formBody.join('&'); // 'username=aakash&password=123213'
+};
